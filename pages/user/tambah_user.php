@@ -1,14 +1,14 @@
 <div>
     <!-- proses -->
     <?php
-    // include "../../conf/conn.php";
     if (isset($_POST['tambah'])) {
         $nama = $_POST['nama'];
-        $alamat = $_POST['alamat'];
-        $jenis_kelamin = $_POST['jenis_kelamin'];
-        $tlp = $_POST['tlp'];
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $id_outlet = $_POST['id_outlet'];
+        $role = $_POST['role'];
 
-        $sql = "INSERT INTO tb_member VALUES (NULL, '$nama', '$alamat', '$jenis_kelamin', '$tlp')";
+        $sql = "INSERT INTO tb_user VALUES (NULL, '$nama', '$username', '$password', '$id_outlet', '$role')";
 
         $result = mysqli_query($kon, $sql);
 
@@ -16,29 +16,24 @@
             die("Connection failed: " . mysqli_connect_error());
         } else {
             echo '<script>alert("Data Berhasil Ditambahkan !!!");
-window.location.href="index.php?page=data_member"</script>';
+    window.location.href="index.php?page=data_user"</script>';
         }
     }
     ?>
 
     <!-- session -->
-    <?php
-    if ($_SESSION["role"] !== "Admin") {
-        echo '<script>alert("Hanya Admin yang dapat mengakses halaman ini !!!"); window.location.href="index.php"</script>';
-    }
-    ?>
-</div>
 
+</div>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            TAMBAH MEMBER
+            TAMBAH USER
         </h1>
         <ol class="breadcrumb">
             <li><a href="index.php"><i class="fa fa-dashboard"></i> HOME</a></li>
-            <li class="active">TAMBAH MEMBER</li>
+            <li class="active">TAMBAH USER</li>
         </ol>
     </section>
     <!-- Main content -->
@@ -52,25 +47,30 @@ window.location.href="index.php?page=data_member"</script>';
                     <!-- form start -->
                     <form role="form" method="post">
                         <div class="box-body">
-                            <div class="form-group">
+                            <div class="form-group has-feedback">
                                 <label>NAMA</label>
-                                <input type="text" name="nama" class="form-control" placeholder="NAMA" required>
+                                <input type="text" class="form-control" name="nama" placeholder="Nama">
                             </div>
-                            <div class="form-group">
-                                <label>ALAMAT</label>
-                                <input type="text" name="alamat" class="form-control" placeholder="ALAMAT" required>
+                            <div class="form-group has-feedback">
+                                <label>USERNAME</label>
+                                <input type="text" class="form-control" name="username" placeholder="Username" required>
                             </div>
-                            <div class="form-group">
-                                <label>JENIS KELAMIN</label>
-                                <select class="form-control" name="jenis_kelamin">
-                                    <option value="">- Pilihan Jenis Kelamin -</option>
-                                    <option value="L">Laki-laki</option>
-                                    <option value="P">Perempuan</option>
+                            <div class="form-group has-feedback">
+                                <label>PASSWORD</label>
+                                <input type="text" class="form-control" name="password" placeholder="Password" required>
+                            </div>
+                            <div class="form-group has-feedback">
+                                <label>ID OUTLET</label>
+                                <input type="number" class="form-control" name="id_outlet" placeholder="Masukan Id Outlet" required>
+                            </div>
+                            <div class="form-group has-feedback">
+                                <label>ROLE</label>
+                                <select class="form-control" id="" name="role" placeholder="Masukan Role" required>
+                                    <option value="">Pilihan Role</option>
+                                    <option value="Admin">Admin</option>
+                                    <option value="Kasir">Kasir</option>
+                                    <option value="Owner">Owner</option>
                                 </select>
-                            </div>
-                            <div class="form-group">
-                                <label>NO TELEPON</label>
-                                <input type="text" name="tlp" class="form-control" placeholder="NO TELEPON" required>
                             </div>
                         </div>
                         <!-- /.box-body -->

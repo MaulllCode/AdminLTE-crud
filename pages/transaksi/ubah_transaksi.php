@@ -1,7 +1,39 @@
-<?php
-$query = mysqli_query($kon, "SELECT * FROM tb_transaksi WHERE id='" . $_GET['id'] . "'");
-$row = mysqli_fetch_array($query);
-?>
+<div>
+    <!-- proses -->
+    <?php
+    if (isset($_POST['ubah'])) {
+        $id = $_POST['id'];
+        $id_outlet = $_POST['id_outlet'];
+        $kode_invoice = $_POST['kode_invoice'];
+        $id_member = $_POST['id_member'];
+        $tgl = $_POST['tgl'];
+        $batas_waktu = $_POST['batas_waktu'];
+        $tgl_bayar = $_POST['tgl_bayar'];
+        $biaya_tambahan = $_POST['biaya_tambahan'];
+        $diskon = $_POST['diskon'];
+        $pajak = $_POST['pajak'];
+        $status = $_POST['status'];
+        $dibayar = $_POST['dibayar'];
+        $id_user = $_POST['id_user'];
+
+        $sql = "UPDATE tb_transaksi SET id_outlet='$id_outlet', kode_invoice='$kode_invoice',id_member='$id_member', tgl='$tgl', batas_waktu='$batas_waktu', tgl_bayar='$tgl_bayar', biaya_tambahan='$biaya_tambahan', diskon='$diskon', pajak='$pajak', status='$status', dibayar='$dibayar', id_user='$id_user' WHERE id ='$id'";
+
+        $result = mysqli_query($kon, $sql);
+
+        if (!$result) {
+            die("Connection failed: " . mysqli_connect_error());
+        } else {
+            echo '<script>alert("Data Berhasil Diubah !!!");
+window.location.href="index.php?page=data_transaksi"</script>';
+        }
+    }
+    ?>
+    <!-- ambil data -->
+    <?php
+    $query = mysqli_query($kon, "SELECT * FROM tb_transaksi WHERE id='" . $_GET['id'] . "'");
+    $row = mysqli_fetch_array($query);
+    ?>
+</div>
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -25,7 +57,7 @@ $row = mysqli_fetch_array($query);
                 <div class="box box-primary">
                     <!-- /.box-header -->
                     <!-- form start -->
-                    <form role="form" method="post" action="pages/transaksi/ubah_transaksi_proses.php">
+                    <form role="form" method="post">
                         <div class="box-body">
                             <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
                             <div class="form-group">
@@ -66,18 +98,34 @@ $row = mysqli_fetch_array($query);
                             </div>
                             <div class="form-group">
                                 <label>STATUS</label>
-                                <select class="form-control" name="status" value="<?php echo $row['status']; ?>>" <option value="">- Pilihan Status -</option>
-                                    <option value="Baru">Baru</option>
-                                    <option value="Proses">Proses</option>
-                                    <option value="Selesai">Selesai</option>
-                                    <option value="Diambil">Diambil</option>
+                                <select class="form-control" name="status" value="<?php echo $row['status']; ?>">
+                                    <option value="<?php echo $row['status']; ?>">-- Pilihan Status Cucian --</option>
+                                    <?php
+                                    $array_status = array('Baru', 'Proses', 'Selesai', 'Diambil');
+                                    foreach ($array_status as $status) {
+                                        if ($row['status'] == $status) {
+                                            echo "<option value='$status' selected>$status</option>";
+                                        } else {
+                                            echo "<option value='$status'>$status</option>";
+                                        }
+                                    }
+                                    ?>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label>DIBAYAR</label>
-                                <select class="form-control" name="dibayar" value="<?php echo $row['dibayar']; ?>>">- Pilihan -</option>
-                                    <option value="Dibayar">Dibayar</option>
-                                    <option value="Belum_dibayar">Belum dibayar</option>
+                                <select class="form-control" name="dibayar">
+                                    <option value="<?php echo $row['dibayar']; ?>">-- Pilihan Pembayaran--</option>
+                                    <?php
+                                    $array_dibayar = array('Dibayar', 'Belum_dibayar');
+                                    foreach ($array_dibayar as $dibayar) {
+                                        if ($row['dibayar'] == $dibayar) {
+                                            echo "<option value='$dibayar' selected>$dibayar</option>";
+                                        } else {
+                                            echo "<option value='$dibayar'>$dibayar</option>";
+                                        }
+                                    }
+                                    ?>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -87,7 +135,8 @@ $row = mysqli_fetch_array($query);
                         </div>
                         <!-- /.box-body -->
                         <div class="box-footer">
-                            <button type="submit" class="btn btn-primary" title="Simpan Data"> <i class="glyphicon glyphicon-floppy-disk"></i> Simpan</button>
+                            <button type="submit" class="btn btn-primary" name="ubah" title="Simpan Data"> <i class="glyphicon glyphicon-floppy-disk"></i> Simpan</button>
+                            <button type="reset" class="btn btn-success" name="tambah" title="Reset Data"> <i class="glyphicon glyphicon-floppy-disk"></i> Reset</button>
                         </div>
                     </form>
                 </div>

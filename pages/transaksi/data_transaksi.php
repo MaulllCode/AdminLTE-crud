@@ -64,7 +64,7 @@
                                         <td><?php echo $row['id_user']; ?></td>
                                         <td>
                                             <a href="index.php?page=ubah_transaksi&id=<?= $row['id']; ?>" class="btn btn-success" role="button" title="Ubah Data"><i class="glyphicon glyphicon-edit"></i></a>
-                                            <a href="pages/transaksi/hapus_transaksi.php?id=<?= $row['id']; ?>" class="btn btn-danger" role="button" title="Hapus Data"><i class="glyphicon glyphicon-trash"></i></a>
+                                            <a onclick="return confirm('Apakah yakin menghapus Data')" href="pages/transaksi/hapus_transaksi.php?id=<?= $row['id']; ?>" class="btn btn-danger" role="button" title="Hapus Data"><i class="glyphicon glyphicon-trash"></i></a>
                                         </td>
                                     </tr>
 

@@ -1,7 +1,45 @@
-<?php
-$query = mysqli_query($kon, "SELECT * FROM tb_member WHERE id='" . $_GET['id'] . "'");
-$row = mysqli_fetch_array($query);
-?>
+<div>
+    <!-- Proses -->
+    <?php
+    // include "../../conf/conn.php";
+    if (isset($_POST['ubah'])) {
+        $id = $_POST['id'];
+        $nama = $_POST['nama'];
+        $alamat = $_POST['alamat'];
+        $jenis_kelamin = $_POST['jenis_kelamin'];
+        $tlp = $_POST['tlp'];
+
+        $sql = "UPDATE tb_member SET nama='$nama', alamat='$alamat', jenis_kelamin='$jenis_kelamin', tlp='$tlp' WHERE id ='$id'";
+
+        $result = mysqli_query($kon, $sql);
+
+        if (!$result) {
+            die("Connection failed: " . mysqli_connect_error());
+        } else {
+            echo '<script>alert("Data Berhasil Diubah !!!");
+window.location.href="index.php?page=data_member"</script>';
+        }
+    }
+    ?>
+
+    <!-- session -->
+    <?php
+    if ($_SESSION["role"] !== "Admin") {
+        echo '<script>alert("Hanya Admin yang dapat mengakses halaman ini !!!"); window.location.href="index.php"</script>';
+    }
+    ?>
+
+    <!-- ambil data -->
+    <?php
+    $query = mysqli_query($kon, "SELECT * FROM tb_member WHERE id='" . $_GET['id'] . "'");
+    $row = mysqli_fetch_array($query);
+    ?>
+
+
+</div>
+
+
+
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -25,7 +63,7 @@ $row = mysqli_fetch_array($query);
                 <div class="box box-primary">
                     <!-- /.box-header -->
                     <!-- form start -->
-                    <form role="form" method="post" action="pages/member/ubah_member_proses.php">
+                    <form role="form" method="post">
                         <div class="box-body">
                             <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
                             <div class="form-group">
@@ -38,9 +76,18 @@ $row = mysqli_fetch_array($query);
                             </div>
                             <div class="form-group">
                                 <label>JENIS KELAMIN</label>
-                                <select class="form-control" name="jenis_kelamin" value="<?php echo $row['jenis_kelamin']; ?>">- Pilihan JENIS KELAMIN -</option>
-                                    <option value="L">Laki-laki</option>
-                                    <option value="P">Perempuan</option>
+                                <select class="form-control" name="jenis_kelamin">
+                                <option value="<?php echo $row['jenis_kelamin']; ?>">-- Pilihan role --</option>
+                                    <?php
+                                    $array_jenis_kelamin = array('L', 'P');
+                                    foreach ($array_jenis_kelamin as $jenis_kelamin) {
+                                        if ($row['jenis_kelamin'] == $jenis_kelamin) {
+                                            echo "<option value='$jenis_kelamin' selected>$jenis_kelamin</option>";
+                                        } else {
+                                            echo "<option value='$jenis_kelamin'>$jenis_kelamin</option>";
+                                        }
+                                    }
+                                    ?>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -50,7 +97,8 @@ $row = mysqli_fetch_array($query);
                         </div>
                         <!-- /.box-body -->
                         <div class="box-footer">
-                            <button type="submit" class="btn btn-primary" title="Simpan Data"> <i class="glyphicon glyphicon-floppy-disk"></i> Simpan</button>
+                            <button type="submit" class="btn btn-primary" name="ubah" title="Simpan Data"> <i class="glyphicon glyphicon-floppy-disk"></i> Simpan</button>
+                            <button type="reset" class="btn btn-success" name="tambah" title="Reset Data"> <i class="glyphicon glyphicon-floppy-disk"></i> Reset</button>
                         </div>
                     </form>
                 </div>

@@ -1,3 +1,33 @@
+<div>
+    <!-- proses -->
+    <?php
+    if (isset($_POST['tambah'])) {
+        $id_outlet = $_POST['id_outlet'];
+        $jenis = $_POST['jenis'];
+        $nama_paket = $_POST['nama_paket'];
+        $harga = $_POST['harga'];
+
+        $sql = "INSERT INTO tb_paket VALUES (NULL, '$id_outlet', '$jenis', '$nama_paket', '$harga')";
+
+        $result = mysqli_query($kon, $sql);
+
+        if (!$result) {
+            die("Connection failed: " . mysqli_connect_error());
+        } else {
+            echo '<script>alert("Data Berhasil Ditambahkan !!!");
+window.location.href="index.php?page=data_paket"</script>';
+        }
+    }
+    ?>
+
+    <!-- session -->
+    <?php
+    if ($_SESSION["role"] !== "Admin") {
+        echo '<script>alert("Hanya Admin yang dapat mengakses halaman ini !!!"); window.location.href="index.php"</script>';
+    }
+    ?>
+</div>
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -19,7 +49,7 @@
                 <div class="box box-primary">
                     <!-- /.box-header -->
                     <!-- form start -->
-                    <form role="form" method="post" action="pages/paket/tambah_paket_proses.php">
+                    <form role="form" method="post">
                         <div class="box-body">
                             <div class="form-group">
                                 <label>ID OUTLET</label>
@@ -28,12 +58,12 @@
                             <div class="form-group">
                                 <label>JENIS CUCIAN</label>
                                 <select class="form-control" name="jenis">
-                                    <option value="">- Pilihan JENIS CUCIAN -</option>
-                                    <option value="kiloan">Kiloan</option>
-                                    <option value="selimut">Selimut</option>
-                                    <option value="bed_cover">Bed Cover</option>
-                                    <option value="kaos">Kaos</option>
-                                    <option value="lain">Lain</option>
+                                    <option value="">- Pilihan Jenis Cucian -</option>
+                                    <option value="Kiloan">Kiloan</option>
+                                    <option value="Selimut">Selimut</option>
+                                    <option value="Bed_cover">Bed Cover</option>
+                                    <option value="Kaos">Kaos</option>
+                                    <option value="Lain">Lain</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -48,6 +78,7 @@
                         <!-- /.box-body -->
                         <div class="box-footer">
                             <button type="submit" class="btn btn-primary" name="tambah" title="Simpan Data"> <i class="glyphicon glyphicon-floppy-disk"></i> Simpan</button>
+                            <button type="reset" class="btn btn-success" name="tambah" title="Reset Data"> <i class="glyphicon glyphicon-floppy-disk"></i> Reset</button>
                         </div>
                     </form>
                 </div>

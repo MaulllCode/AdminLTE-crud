@@ -64,7 +64,7 @@ include "conf/conn.php";
 
         <header class="main-header">
             <!-- Logo -->
-            <a href="index2.html" class="logo">
+            <a href="index.php" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>A</b>LT</span>
                 <!-- logo for regular state and mobile devices -->
@@ -159,17 +159,17 @@ include "conf/conn.php";
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <!-- <li><a href="index.php?page=data_mahasiswa"><i class="glyphicon glyphicon-education"></i> <span>Data Mahasiswa</span></a></li> -->
-                            <li><a href="index.php?page=data_member"><i class="glyphicon glyphicon-education"></i> <span>Data member</span></a></li>
-                            <li><a href="index.php?page=data_outlet"><i class="glyphicon glyphicon-education"></i> <span>Data outlet</span></a></li>
-                            <li><a href="index.php?page=data_paket"><i class="glyphicon glyphicon-education"></i> <span>Data paket</span></a></li>
-                            <li><a href="index.php?page=data_transaksi"><i class="glyphicon glyphicon-education"></i> <span>Data transaksi</span></a></li>
+                            <li><a href="index.php?page=data_user"><i class="glyphicon glyphicon-user"></i> <span>Data User</span></a></li>
+                            <li><a href="index.php?page=data_member"><i class="glyphicon glyphicon-user"></i> <span>Data Member</span></a></li>
+                            <li><a href="index.php?page=data_outlet"><i class="glyphicon glyphicon-bullhorn"></i> <span>Data Outlet</span></a></li>
+                            <li><a href="index.php?page=data_paket"><i class="glyphicon glyphicon-gift"></i> <span>Data Paket</span></a></li>
+                            <li><a href="index.php?page=data_transaksi"><i class="glyphicon glyphicon-shopping-cart"></i> <span>Data Transaksi</span></a></li>
                         </ul>
                     </li>
                     <li class="header">SETTING</li>
                     <li class="treeview">
                         <!-- <li><a href="#"><i class="glyphicon glyphicon-cog"></i> <span>Pengaturan</span></a></li> -->
-                    <li><a href="pages/logout_process.php"><i class="glyphicon glyphicon-lock"></i> <span>Logout</span></a></li>
+                    <li><a href="pages/logout_process.php"><i class="glyphicon glyphicon-log-out"></i> <span>Logout</span></a></li>
                     </li>
                 </ul>
             </section>

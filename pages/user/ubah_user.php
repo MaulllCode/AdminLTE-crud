@@ -3,12 +3,13 @@
     <?php
     if (isset($_POST['ubah'])) {
         $id = $_POST['id'];
+        $nama = $_POST['nama'];
+        $username = $_POST['username'];
+        $password = $_POST['password'];
         $id_outlet = $_POST['id_outlet'];
-        $jenis = $_POST['jenis'];
-        $nama_paket = $_POST['nama_paket'];
-        $harga = $_POST['harga'];
+        $role = $_POST['role'];
 
-        $sql = "UPDATE tb_paket SET id_outlet='$id_outlet', jenis='$jenis', nama_paket='$nama_paket', harga='$harga' WHERE id ='$id'";
+        $sql = "UPDATE tb_user SET nama='$nama', username='$username', password='$password', id_outlet='$id_outlet', role='$role' WHERE id ='$id'";
 
         $result = mysqli_query($kon, $sql);
 
@@ -16,7 +17,7 @@
             die("Connection failed: " . mysqli_connect_error());
         } else {
             echo '<script>alert("Data Berhasil Diubah !!!");
-window.location.href="index.php?page=data_paket"</script>';
+window.location.href="index.php?page=data_user"</script>';
         }
     }
     ?>
@@ -30,22 +31,21 @@ window.location.href="index.php?page=data_paket"</script>';
 
     <!-- ambil data -->
     <?php
-    $query = mysqli_query($kon, "SELECT * FROM tb_paket WHERE id='" . $_GET['id'] . "'");
+    $query = mysqli_query($kon, "SELECT * FROM tb_user WHERE id='" . $_GET['id'] . "'");
     $row = mysqli_fetch_array($query);
     ?>
 </div>
-
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            UBAH PAKET
+            UBAH USER
         </h1>
         <ol class="breadcrumb">
             <li><a href="index.php"><i class="fa fa-dashboard"></i> HOME</a></li>
-            <li class="active">UBAH PAKET</li>
+            <li class="active">UBAH USER</li>
         </ol>
     </section>
 
@@ -61,33 +61,37 @@ window.location.href="index.php?page=data_paket"</script>';
                     <form role="form" method="post">
                         <div class="box-body">
                             <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-                            <div class="form-group">
-                                <label>ID OUTLET</label>
-                                <input type="NUMBER" name="id_outlet" class="form-control" placeholder="ID OUTLET" required value="<?php echo $row['id_outlet']; ?>">
+                            <div class="form-group has-feedback">
+                                <label>NAMA</label>
+                                <input type="text" class="form-control" name="nama" placeholder="Nama" required value="<?php echo $row['nama']; ?>">
                             </div>
-                            <div class="form-group">
-                                <label>JENIS CUCIAN</label>
-                                <select class="form-control" name="jenis" required>
-                                <option value="<?php echo $row['jenis']; ?>">-- Pilihan Jenis Cucian --</option>
+                            <div class="form-group has-feedback">
+                                <label>USERNAME</label>
+                                <input type="text" class="form-control" name="username" placeholder="Username" required value="<?php echo $row['username']; ?>">
+                            </div>
+                            <div class="form-group has-feedback">
+                                <label>PASSWORD</label>
+                                <input type="text" class="form-control" name="password" placeholder="Password" required value="<?php echo $row['password']; ?>">
+                            </div>
+                            <div class="form-group has-feedback">
+                                <label>ID OUTLET</label>
+                                <input type="number" class="form-control" name="id_outlet" placeholder="Masukan Id Outlet" required value="<?php echo $row['id_outlet']; ?>">
+                            </div>
+                            <div class="form-group has-feedback">
+                                <label>ROLE</label>
+                                <select class="form-control" id="" name="role" placeholder="Masukan Role" required>
+                                    <option value="<?php echo $row['role']; ?>">-- Pilihan role --</option>
                                     <?php
-                                    $array_jenis = array('Kiloan','Selimut','Bed_cover','Kaos','Lain');
-                                    foreach ($array_jenis as $jenis) {
-                                        if ($row['jenis'] == $jenis) {
-                                            echo "<option value='$jenis' selected>$jenis</option>";
+                                    $array_role = array('Admin', 'Owner', 'Kasir');
+                                    foreach ($array_role as $role) {
+                                        if ($row['role'] == $role) {
+                                            echo "<option value='$role' selected>$role</option>";
                                         } else {
-                                            echo "<option value='$jenis'>$jenis</option>";
+                                            echo "<option value='$role'>$role</option>";
                                         }
                                     }
                                     ?>
                                 </select>
-                            </div>
-                            <div class="form-group">
-                                <label>NAMA PAKET</label>
-                                <input type="text" name="nama_paket" class="form-control" placeholder="NAMA PAKET" required value="<?php echo $row['nama_paket']; ?>">
-                            </div>
-                            <div class="form-group">
-                                <label>HARGA</label>
-                                <input type="NUMBER" name="harga" class="form-control" placeholder="HARGA" required value="<?php echo $row['harga']; ?>">
                             </div>
                         </div>
                         <!-- /.box-body -->

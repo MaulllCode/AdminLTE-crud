@@ -1,5 +1,4 @@
 <?php
-session_start();
 include '../conf/conn.php';
 if (!isset($_SESSION['role']))
 {

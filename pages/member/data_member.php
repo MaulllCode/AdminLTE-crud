@@ -1,3 +1,12 @@
+<div>
+    <!-- session -->
+    <?php
+    if ($_SESSION["role"] !== "Admin") {
+        echo '<script>alert("Hanya Admin yang dapat mengakses halaman ini !!!"); window.location.href="index.php"</script>';
+    }
+    ?>
+</div>
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -48,7 +57,7 @@
                                         <td><?php echo $row['tlp']; ?></td>
                                         <td>
                                             <a href="index.php?page=ubah_member&id=<?= $row['id']; ?>" class="btn btn-success" role="button" title="Ubah Data"><i class="glyphicon glyphicon-edit"></i></a>
-                                            <a href="pages/member/hapus_member.php?id=<?= $row['id']; ?>" class="btn btn-danger" role="button" title="Hapus Data"><i class="glyphicon glyphicon-trash"></i></a>
+                                            <a onclick="return confirm('Apakah yakin menghapus Data')" href="pages/member/hapus_member.php?id=<?= $row['id']; ?>" class="btn btn-danger" role="button" title="Hapus Data"><i class="glyphicon glyphicon-trash"></i></a>
                                         </td>
                                     </tr>
 

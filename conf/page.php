@@ -3,14 +3,14 @@ if (isset($_GET['page'])) {
     $page = $_GET['page'];
     switch ($page) {
             // Beranda
-        case 'data_mahasiswa':
-            include 'pages/mahasiswa/data_mahasiswa.php';
+        case 'data_user':
+            include 'pages/user/data_user.php';
             break;
-        case 'tambah_mahasiswa':
-            include 'pages/mahasiswa/tambah_mahasiswa.php';
+        case 'tambah_user':
+            include 'pages/user/tambah_user.php';
             break;
-        case 'ubah_mahasiswa';
-            include 'pages/mahasiswa/ubah_mahasiswa.php';
+        case 'ubah_user';
+            include 'pages/user/ubah_user.php';
             break;
         case 'data_member':
             include 'pages/member/data_member.php';
